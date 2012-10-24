@@ -35,4 +35,4 @@ def encrypt(infile, outfile, colors, factor=1):
 
     img.putdata(clean_data)
 
-    img.save(outfile)
+    img.save(outfile, "PNG")
