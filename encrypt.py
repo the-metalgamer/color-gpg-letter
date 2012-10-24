@@ -24,26 +24,14 @@ def encrypt(infile, outfile, colors, factor=1):
         for line in f:
             imageline = []
             for char in line.ljust(65, " "):
-
                 if char != "\n":
-                    imageline.append(colors[char])
-                elif char == "\n":
-                    data.append(imageline)
-
-    extendeddata = []
-
-    for line in data:
-        charline = []
-        for char in line:
-            charline.append([char]*factor)
-        extendeddata.append([charline]*factor)
+                    imageline.extend(([colors[char]] * factor))
+                else:
+                    data.extend([imageline] * factor)
 
     clean_data = []
-    for i in extendeddata:
-        for j in i:
-            for k in j:
-                for a in k:
-                    clean_data.append(a)
+    for i in data:
+        clean_data.extend(i)
 
     img.putdata(clean_data)
 
