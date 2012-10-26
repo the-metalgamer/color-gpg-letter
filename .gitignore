@@ -58,3 +58,4 @@ nosetests.xml
 
 *.png
 *.txt.asc
+*.txt

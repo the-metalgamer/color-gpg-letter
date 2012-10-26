@@ -15,8 +15,9 @@ parser = argparse.ArgumentParser()
 
 
 parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE", nargs="?", default=sys.stdin)
-
 parser.add_argument("dest", help="The destination", metavar="DEST", nargs="?", default=sys.stdout)
+
+parser.add_argument("-o", "--output", type=str, help="The output file if source is stdin")
 
 group = parser.add_mutually_exclusive_group()
 
@@ -24,7 +25,7 @@ group.add_argument("-d", "--decrypt", action="store_true", help="Force decryptio
 group.add_argument("-e", "--encrypt", action="store_true", help="Force encryption")
 
 parser.add_argument("-c", "--colorfile", type=str, help="The color file to use, defaults to colors.json", metavar="FILE")
-parser.add_argument("-s", "--pixelfactor", type=int, help="The factor to be used as pixelsize", metavar="N", default=1)
+parser.add_argument("-f", "--pixelfactor", type=int, help="The factor to be used as pixelsize", metavar="N", default=1)
 
 args = parser.parse_args()
 
@@ -44,6 +45,9 @@ elif not args.encrypt and not args.decrypt:
         doencrypt = True
     elif os.path.splitext(args.source)[1] == ".png":
         doencrypt = False
+
+if args.output:
+    args.dest = args.output
 
 if doencrypt:
     encrypt.encrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)
