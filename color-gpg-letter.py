@@ -13,8 +13,10 @@ import decrypt
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE")
-parser.add_argument("dest", help="The destination", metavar="DEST")
+
+parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE", nargs="?", default=sys.stdin)
+
+parser.add_argument("dest", help="The destination", metavar="DEST", nargs="?", default=sys.stdout)
 
 group = parser.add_mutually_exclusive_group()
 
