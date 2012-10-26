@@ -25,7 +25,7 @@ group.add_argument("-d", "--decrypt", action="store_true", help="Force decryptio
 group.add_argument("-e", "--encrypt", action="store_true", help="Force encryption")
 
 parser.add_argument("-c", "--colorfile", type=str, help="The color file to use, defaults to colors.json", metavar="FILE")
-parser.add_argument("-s", "--pixelfactor", type=int, help="The factor to be used as pixelsize", metavar="N", default=1)
+parser.add_argument("-f", "--pixelfactor", type=int, help="The factor to be used as pixelsize", metavar="N", default=1)
 
 args = parser.parse_args()
 
