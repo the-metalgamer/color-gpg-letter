@@ -5,6 +5,7 @@ from __future__ import with_statement
 
 import argparse
 import os.path
+import sys
 
 import common
 import encrypt
