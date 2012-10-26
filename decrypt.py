@@ -3,6 +3,9 @@
 from __future__ import print_function
 from __future__ import with_statement
 
+import sys
+import StringIO
+
 import Image
 
 
@@ -21,8 +24,10 @@ def decrypt(infile, outfile, colors, factor=1):
 
     colors = swapdict(colors)
 
+    if infile == sys.stdin:
+        infile = StringIO.StringIO(sys.stdin.read())
+
     img = Image.open(infile)
-    #img = img.resize((img.size[0] / factor, img.size[1] / factor), Image.NEAREST)
 
     data = img.getdata()
     data = list(data)
@@ -38,7 +43,10 @@ def decrypt(infile, outfile, colors, factor=1):
             chars.append(char)
         corrected_data.append(chars)
 
-    with open(outfile, 'w') as f:
+    if outfile != sys.stdout:
+        outfile = open(outfile,'w')
+
+    with outfile as f:
         for line in corrected_data:
             for color in line:
                     f.write(colors[color])

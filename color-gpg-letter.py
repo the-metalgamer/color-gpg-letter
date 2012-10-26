@@ -15,8 +15,9 @@ parser = argparse.ArgumentParser()
 
 
 parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE", nargs="?", default=sys.stdin)
-
 parser.add_argument("dest", help="The destination", metavar="DEST", nargs="?", default=sys.stdout)
+
+parser.add_argument("-o", "--output", type=str, help="The output file if source is stdin")
 
 group = parser.add_mutually_exclusive_group()
 
@@ -44,6 +45,9 @@ elif not args.encrypt and not args.decrypt:
         doencrypt = True
     elif os.path.splitext(args.source)[1] == ".png":
         doencrypt = False
+
+if args.output:
+    args.dest = args.output
 
 if doencrypt:
     encrypt.encrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)

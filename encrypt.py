@@ -3,13 +3,18 @@
 from __future__ import print_function
 from __future__ import with_statement
 
+import sys
+
 import Image
 
 
 def get_size(infile, factor):
 
-    lines = (max(enumerate(open(infile, 'r')))[0] + 1) * factor
-    columns = (len(max(open(infile, 'r'), key=len)) - 1) * factor
+    if infile == sys.stdin:
+        lines = (max(enumerate(infile))[0] + 1) * factor
+    else:
+        lines = (max(enumerate(open(infile, 'r')))[0] + 1) * factor
+    columns = 64 * factor
     return (columns, lines)
 
 
@@ -19,8 +24,11 @@ def encrypt(infile, outfile, colors, factor=1):
 
     img = Image.new("RGB", size, (255, 255, 255))
 
+    if infile != sys.stdin:
+        infile = open(infile)
+
     data = []
-    with open(infile) as f:
+    with infile as f:
         for line in f:
             imageline = []
             for char in line.ljust(65, " "):
