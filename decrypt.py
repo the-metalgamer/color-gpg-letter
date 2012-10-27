@@ -10,6 +10,9 @@ import Image
 
 
 def swapdict(dictionary):
+    '''
+    Function to swap the values with the keys in a dict
+    '''
 
     newdict = dict(zip(dictionary.values(), dictionary.keys()))
 
@@ -17,10 +20,23 @@ def swapdict(dictionary):
 
 
 def splitlist(input, size):
+    '''
+    Function to split a list in lists of a certain size
+    '''
+
     return map(None, *([iter(input)] * size))
 
 
 def decrypt(infile, outfile, colors, factor=1):
+    '''
+    Function to decrypt a PNG to txt
+
+    @param infile: The PNG to decrypt
+    @param outfile: The file to save the output
+    @param colors: The colors to use
+    @param factor: The pixelsize used
+    '''
+
 
     colors = swapdict(colors)
 
