@@ -88,13 +88,18 @@ standard_colors = {
 }
 
 def tuplify(dictionary):
+    '''
+    Function to change the values of a list to a tuple
+    '''
 
     for key in iter(dictionary):
         dictionary[key] = tuple(dictionary[key])
 
 
 def get_colors(colorfile=None):
-
+    '''
+    Function to load the colors from a json file
+    '''
     if colorfile is not None:
         colors = json.load(open(colorfile))
         tuplify(colors)
