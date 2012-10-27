@@ -9,6 +9,9 @@ import Image
 
 
 def get_size(infile, factor):
+    '''
+    Function to get lines an columns of a file
+    '''
 
     if infile == sys.stdin:
         lines = (max(enumerate(infile))[0] + 1) * factor
@@ -19,6 +22,14 @@ def get_size(infile, factor):
 
 
 def encrypt(infile, outfile, colors, factor=1):
+    '''
+    Function to encrypt a base64 encoded file to PNG
+
+    @param infile: The file to encrypt
+    @param outfile: The file to save to
+    @param colors: The colors to use
+    @param factor: The factor the size per pixel gets multiplied
+    '''
 
     size = get_size(infile, factor)
 
