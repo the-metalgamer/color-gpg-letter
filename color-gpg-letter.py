@@ -41,7 +41,9 @@ if args.encrypt:
 elif args.decrypt:
     doencrypt = False
 elif not args.encrypt and not args.decrypt:
-    if os.path.splitext(args.source)[1] == ".asc":
+    if args.source == sys.stdin:
+        doencrypt = True
+    elif os.path.splitext(args.source)[1] == ".asc":
         doencrypt = True
     elif os.path.splitext(args.source)[1] == ".png":
         doencrypt = False
