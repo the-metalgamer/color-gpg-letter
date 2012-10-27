@@ -14,8 +14,8 @@ import decrypt
 parser = argparse.ArgumentParser()
 
 
-parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE", nargs="?", default=sys.stdin)
-parser.add_argument("dest", help="The destination", metavar="DEST", nargs="?", default=sys.stdout)
+parser.add_argument("source", help="The file to encrypt or decrypt (based on extension)", metavar="SOURCE", default=sys.stdin)
+parser.add_argument("dest", help="The destination", metavar="DEST", default=sys.stdout)
 
 parser.add_argument("-o", "--output", type=str, help="The output file if source is stdin")
 
@@ -41,7 +41,9 @@ if args.encrypt:
 elif args.decrypt:
     doencrypt = False
 elif not args.encrypt and not args.decrypt:
-    if os.path.splitext(args.source)[1] == ".asc":
+    if args.source == sys.stdin:
+        doencrypt = True
+    elif os.path.splitext(args.source)[1] == ".asc":
         doencrypt = True
     elif os.path.splitext(args.source)[1] == ".png":
         doencrypt = False
