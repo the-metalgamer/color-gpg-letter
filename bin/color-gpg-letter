@@ -7,9 +7,9 @@ import argparse
 import os.path
 import sys
 
-import common
-import encrypt
-import decrypt
+import colorgpgletter.common
+import colorgpgletter.encrypt
+import colorgpgletter.decrypt
 
 parser = argparse.ArgumentParser()
 
@@ -34,7 +34,7 @@ if not args.colorfile:
 else:
     colorfile = args.colorfile
 
-colors = common.get_colors(colorfile)
+colors = colorgpgletter.common.get_colors(colorfile)
 
 if args.encrypt:
     doencrypt = True
@@ -52,6 +52,6 @@ if args.output:
     args.dest = args.output
 
 if doencrypt:
-    encrypt.encrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)
+    colorgpgletter.encrypt.encrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)
 else:
-    decrypt.decrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)
+    colorgpgletter.decrypt.decrypt(infile=args.source, outfile=args.dest, colors=colors, factor=args.pixelfactor)
