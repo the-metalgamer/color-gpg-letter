@@ -4,6 +4,7 @@ from __future__ import print_function
 from __future__ import with_statement
 
 import sys
+import StringIO
 
 import Image
 
@@ -14,10 +15,12 @@ def get_size(infile, factor):
     '''
 
     if infile == sys.stdin:
+        infile = StringIO.StringIO(sys.stdin.read())
         lines = (max(enumerate(infile))[0] + 1) * factor
+        columns = (len(max(open(infile, 'r'), key=len)) - 1) * factor
     else:
         lines = (max(enumerate(open(infile, 'r')))[0] + 1) * factor
-    columns = 64 * factor
+        columns = (len(max(open(infile, 'r'), key=len)) - 1) * factor
     return (columns, lines)
 
 
