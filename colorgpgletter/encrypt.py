@@ -21,6 +21,7 @@ def get_size(infile, factor):
     else:
         lines = (max(enumerate(open(infile, 'r')))[0] + 1) * factor
         columns = (len(max(open(infile, 'r'), key=len)) - 1) * factor
+
     return (columns, lines)
 
 
@@ -45,7 +46,7 @@ def encrypt(infile, outfile, colors, factor=1):
     with infile as f:
         for line in f:
             imageline = []
-            for char in line.ljust(65, " "):
+            for char in line.ljust((size[0]/factor)+1, " "):
                 if char != "\n":
                     imageline.extend(([colors[char]] * factor))
                 else:

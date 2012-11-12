@@ -49,7 +49,7 @@ def decrypt(infile, outfile, colors, factor=1):
     data = list(data)
     splitted_data = []
 
-    for line in splitlist(data, 64 * factor):
+    for line in splitlist(data, img.size[0]):
         splitted_data.append(line)
 
     corrected_data = []
